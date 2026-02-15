@@ -2,7 +2,7 @@
 
 An AI-powered application that automatically generates social media posts for events. Create events, generate platform-specific content with different tones, and manage your social media content all in one place.
 
-##IMPORTANT
+# IMPORTANT
 
 ⚠ Requires MySQL Server to be installed and running locally.
 
