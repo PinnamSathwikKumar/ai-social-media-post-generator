@@ -1,0 +1,14 @@
+# Database Configuration
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=social_media_generator
+
+# OpenAI API Key (for AI content generation)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Flask Configuration
+FLASK_ENV=development
+FLASK_DEBUG=True
+SECRET_KEY=your_secret_key_here
+
