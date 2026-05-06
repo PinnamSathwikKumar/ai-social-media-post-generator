@@ -1,23 +1,25 @@
+import os
 import mysql.connector
 from mysql.connector import Error
-from config import Config
 
 class Database:
     def __init__(self):
         self.initialize_database()
 
     def initialize_database(self):
-        """Create database and tables once"""
         try:
             conn = mysql.connector.connect(
-                host=Config.DB_HOST,
-                user=Config.DB_USER,
-                password=Config.DB_PASSWORD
+                host=os.environ.get("MYSQLHOST"),
+                user=os.environ.get("MYSQLUSER"),
+                password=os.environ.get("MYSQLPASSWORD"),
+                port=os.environ.get("MYSQLPORT")
             )
 
             cursor = conn.cursor()
-            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {Config.DB_NAME}")
-            conn.database = Config.DB_NAME
+
+            db_name = os.environ.get("MYSQLDATABASE")
+            cursor.execute(f"CREATE DATABASE IF NOT EXISTS {db_name}")
+            conn.database = db_name
 
             # Events table
             cursor.execute("""
@@ -59,13 +61,13 @@ class Database:
             print("Database initialization error:", e)
 
     def get_connection(self):
-        """Always return a fresh connection"""
         try:
             return mysql.connector.connect(
-                host=Config.DB_HOST,
-                user=Config.DB_USER,
-                password=Config.DB_PASSWORD,
-                database=Config.DB_NAME
+                host=os.environ.get("MYSQLHOST"),
+                user=os.environ.get("MYSQLUSER"),
+                password=os.environ.get("MYSQLPASSWORD"),
+                database=os.environ.get("MYSQLDATABASE"),
+                port=os.environ.get("MYSQLPORT")
             )
         except Error as e:
             print("Connection error:", e)
